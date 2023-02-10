@@ -131,6 +131,6 @@ EXPIRING_TOKEN_DURATION=timedelta(hours=168)
 # Configuracion de seguridad del token, para que tenga la funcion de expirar
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'django_expiring_token.authentication.ExpiringTokenAuthentication',
-    ),
+        'django_expiring_token.authentication.ExpiringTokenAuthentication'
+    )
 }

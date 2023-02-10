@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .view import CustomAuthTokenLogin
+from .view import CustomAuthTokenLogin, RegisterAPI
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/register/', RegisterAPI.as_view(), name='register'),
     path('api-auth/', CustomAuthTokenLogin.as_view()),
 ]
