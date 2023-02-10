@@ -7,7 +7,6 @@ from django.core.serializers import serialize
 def members(request):
     return HttpResponse("Hello world!")
 
-
 def verProductos(request):
     '''Devolvemos json con todos los productos'''
     if request.method == "GET":
@@ -24,7 +23,7 @@ def productoId(request, id):
         producto = serialize('json', Producto.objects.filter(id__icontains=id))
         return JsonResponse(producto, safe=False)
     elif request.method == "DELETE":
-        producto = serialize('json', Producto.objects.filter(id_icontains=id).delete())
+        producto = serialize('json', Producto.objects.get(id_icontains=id).delete())
         return JsonResponse(producto, safe=False)
 
 
