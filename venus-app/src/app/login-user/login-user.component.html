@@ -1,1 +1,51 @@
-<p>login-user works asdas!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="container justify-content-center align-items-center">
+
+
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="username">Usuario: </label>
+                <input id="username" type="text" (change)="onChangeInput($event)" formControlName="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña: </label>
+                <input id="password" type="password" formControlName="password">
+            </div>
+
+
+            <div *ngIf="errores.length!=0;">
+
+                <div class="alert alert-danger">
+                    <span>{{errores[0]}}</span>
+                </div>
+
+            </div>
+
+            <div *ngIf="exito">
+
+                <div class="alert alert-success">
+                    <span>Usuario Correcto</span>
+                </div>
+            </div>
+
+
+            <button type="submit" [disabled]="!profileForm.valid" class="btn btn-primary">Acceder</button>
+
+        </form>
+    </div>
+
+</body>
+
+</html>

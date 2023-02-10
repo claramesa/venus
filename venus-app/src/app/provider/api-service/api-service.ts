@@ -4,7 +4,8 @@ import { Usuario } from 'src/app/modelo/Usuario';
 import { InterfaceUser } from 'src/app/modelo/interfaces';
 import { set, remove } from "local-storage"
 import { Route } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Injectable()
 export class ApiServiceProvider {
 
@@ -25,45 +26,40 @@ export class ApiServiceProvider {
     Si el acceso ha ido mal devolvemos el mensaje de error que no llega mediante reject.
     */
 
-    getAllUser(): Observable<[]>{
+    getAllUser(): Observable<[]> {
 
-      return this.http.get<any>(`${this.URL}`);
+        return this.http.get<any>(`${this.URL}`);
 
     }
-  
 
-    /* Params @usuario 
-              @userApi */
-    login(usuario:Usuario):Observable<Usuario> {
-        return this.http.get<any>(`${this.URL}`)
-        .pipe( param=>{
-          map( (user)=>{
-              return user
-           })
-        });
-         
-            
-            
-            
-        }
-            
-            
-            // finds authenticatedUser
-            /*
-    getUsuario(usuarioname:any, password:any): Promise<Usuario> {
-        let promise = new Promise<Usuario>((resolve, reject) => {
-            this.http.get(this.URL + "/who").toPromise()
+    getUsuario(user: Usuario) {
+        var usuarioVar: Usuario;
+        let promise = new Promise<any>((resolve, reject) => {
+            this.http.get(this.URL).toPromise()
                 .then((data: any) => {
-                   //local  
-                
-                });
-                    resolve();
+                    usuarioVar = data.map((res: Usuario) => {
+                        if (res.username === user.username){
+                            
+                            if(res.password === user.password) {
+                                localStorage.setItem("user_token",JSON.stringify("__TOKEN__"));
+                                resolve({"user":true,"message":"Usuario correcto"});
+                            }
+                           
+                            reject({"user":false,"message":"Contraseña incorrecta"});
+
+                        }
+                        reject({"user":false,"message":"No existe el usuario"});
+
+                      
+                    });
+
                 })
                 .catch((error: Error) => {
-                    reject();
+                    reject(error.message);
                 });
         });
+
         return promise;
-    }//end_getAlumnos
-*/
+    }
+
 }//end_class
