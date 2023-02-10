@@ -21,4 +21,5 @@ from inventario import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', views.verProductos),
+    path('productos/<int:id>', views.productoId),
 ]

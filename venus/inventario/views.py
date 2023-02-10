@@ -11,10 +11,21 @@ def members(request):
 def verProductos(request):
     '''Devolvemos json con todos los productos'''
     if request.method == "GET":
-        productos = serialize('json', Producto.objects.all())
-        return JsonResponse(productos, safe=False)
+        if request.body is None:
+            productos = serialize('json', Producto.objects.all())
+            return JsonResponse(productos, safe=False)
+        else:
+            producto = serialize('json', Producto.objects.filter(id__icontains=request.body))
+            return JsonResponse(producto, safe=False)
 
-
+def productoId(request, id):
+    '''Modificamos o devolvemos un producto por su Id'''
+    if request.method == "GET":
+        producto = serialize('json', Producto.objects.filter(id__icontains=id))
+        return JsonResponse(producto, safe=False)
+    elif request.method == "DELETE":
+        producto = serialize('json', Producto.objects.filter(id_icontains=id).delete())
+        return JsonResponse(producto, safe=False)
 
 
 #class verProductos(generic.ListView):
