@@ -134,3 +134,6 @@ REST_FRAMEWORK = {
         'django_expiring_token.authentication.ExpiringTokenAuthentication'
     )
 }
+
+#Hacemos que Django utilice CustomUser en lugar de su modelo genérico
+AUTH_USER_MODEL = "authentication.CustomUser"

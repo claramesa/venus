@@ -31,6 +31,7 @@ class ExpiringTokenAuthentication(TokenAuthentication):
             raise AuthenticationFailed(
                 {"error": "Invalid user", "is_authenticated": False}
             )
+        #REQUIRED_FIELDS = ['username', 'password']  # new
 
         utc_now = timezone.now()
         utc_now = utc_now.replace(tzinfo=pytz.utc)
