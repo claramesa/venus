@@ -16,11 +16,11 @@ export class ApiServiceProvider {
 
     authenticatedusuario() {
         return localStorage.getItem("user");
-    }
+    }//end_auth
 
     getAllUser(): Observable<[]> {
         return this.http.get<any>(`${this.URL}`);
-    }
+    }//end_all_user
 
     getUsuario(user: Usuario) {
         var usuarioVar: Usuario;
@@ -45,7 +45,7 @@ export class ApiServiceProvider {
         });
 
         return promise;
-    }
+    }//end_usuario
 
     checkUser(user: Usuario) {
 
@@ -56,6 +56,6 @@ export class ApiServiceProvider {
         }
         return this.http.post(this.URLDjango + "/api/auth", body, { headers });
 
-    }
+    }//end_user_django
 
 }//end_class
