@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaderResponse, HttpResponse, HttpHeaders } from '@angular/common/http';
 import { Usuario } from 'src/app/modelo/Usuario';
 import { InterfaceUser } from 'src/app/modelo/interfaces';
 import { set, remove } from "local-storage"
@@ -12,7 +12,7 @@ export class ApiServiceProvider {
     private URL = "https://63e5f85a83c0e85a868a1df1.mockapi.io/api/who/users";
     private URLDjango = "https:/localhost:8000";
 
-    constructor(public http: HttpClient, public header: HttpHeaders) { }
+    constructor(public http: HttpClient) { }
 
     authenticatedusuario() {
         return localStorage.getItem("user");
@@ -49,12 +49,16 @@ export class ApiServiceProvider {
 
     checkUser(user: Usuario) {
 
-        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        const body = {
+       
+        
+       const headers= new HttpHeaders()
+         .set('content-type', 'application/json')
+         .set('Access-Control-Allow-Origin', '*');
+                const body = {
             'username': user.username,
             'password': user.password
         }
-        return this.http.post(this.URLDjango + "/api/auth", body, { headers });
+        return this.http.post(this.URLDjango + "/api/auth", body, {headers});
 
     }//end_user_django
 

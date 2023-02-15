@@ -24,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
       {path: '', redirectTo: '/login', pathMatch: 'full'},
     ]),
   ],
-  providers: [ApiServiceProvider],
+  providers: [ ApiServiceProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
