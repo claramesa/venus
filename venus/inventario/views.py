@@ -32,7 +32,8 @@ def productoId(request, id):
         return JsonResponse(f"Producto con id = {id}, borrado con exito", safe=False)
 
     elif request.method == "PUT":
-        Producto.save(update_fields=["categoria", "nombre", "precio", "stock", "descripcion"])
+        Producto.save(self=request.body )
+        return JsonResponse(f"Producto añadido", safe=False)
 
 
 #class verProductos(generic.ListView):
