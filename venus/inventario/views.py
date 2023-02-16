@@ -8,15 +8,17 @@ from django.views.decorators.csrf import csrf_exempt
 def members(request):
     return HttpResponse("Hello world!" + str(request.headers))
 
+@csrf_exempt
 def verProductos(request):
     '''Devolvemos json con todos los productos'''
     if request.method == "GET":
-        if request.body is None:
-            productos = serialize('json', Producto.objects.all())
-            return JsonResponse(productos, safe=False)
-        else:
-            producto = serialize('json', Producto.objects.filter(id__icontains=request.body))
-            return JsonResponse(producto, safe=False)
+        productos = serialize('json', Producto.objects.all())
+        return JsonResponse(productos, safe=False)
+    
+    elif request.method == "DELETE":
+        '''Método para borrar todos los productos'''
+        Producto.objects.all().delete()
+        return JsonResponse("Todos los productos borrados", safe=False)
 
 @csrf_exempt
 def productoId(request, id):
@@ -32,12 +34,6 @@ def productoId(request, id):
     elif request.method == "PUT":
         Producto.save(update_fields=["categoria", "nombre", "precio", "stock", "descripcion"])
 
-@csrf_exempt
-def productorBorrar(request):
-    '''Método para borrar todos los productos'''
-    if request.method == "DELETE":
-        Producto.objects.all().delete()
-        return JsonResponse("Todos los productos borrados", safe=False)
 
 #class verProductos(generic.ListView):
 #   model = Producto
