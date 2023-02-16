@@ -7,10 +7,10 @@ import { Route } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 @Injectable()
-export class ApiServiceProvider {
+export class ApiServiceProvider {//implements HttpInterceptor
 
     private URL = "https://63e5f85a83c0e85a868a1df1.mockapi.io/api/who/users";
-    private URLDjango = "https:/localhost:8000";
+    private URLDjango = "https:/localhost:8001";
 
     constructor(public http: HttpClient) { }
 
@@ -48,18 +48,30 @@ export class ApiServiceProvider {
     }//end_usuario
 
     checkUser(user: Usuario) {
-
-       
-        
        const headers= new HttpHeaders()
-         .set('content-type', 'application/json')
+         .set('content-type', 'application/json; charset=utf-8')
          .set('Access-Control-Allow-Origin', '*');
                 const body = {
             'username': user.username,
             'password': user.password
         }
-        return this.http.post(this.URLDjango + "/api/auth", body, {headers});
+        return this.http.post(this.URLDjango + "/api-auth", body, {headers});
 
     }//end_user_django
 
+
+    //https://stackoverflow.com/questions/48501513/set-jwt-token-in-header-in-angular-5-app
+  
+    /*What about deprecated - import HttpHeaders from the @angular/common/http. 
+      If you need to add the JWT for each token, it will be better to use HttpInterceptor */
+    findUser(paramToken: any) {
+        const token = JSON.stringify(paramToken);
+        const headers= new HttpHeaders()
+          .set('content-type', 'application/json; charset=utf-8')
+          .set('Authorization',  `Bearer  ${token}`);
+            
+         return this.http.get(this.URLDjango + "/api-auth/who",{headers});
+ 
+     }//end_user_django
+ 
 }//end_class
