@@ -2,10 +2,11 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from .models import Producto
 from django.core.serializers import serialize
+from django.views.decorators.csrf import csrf_exempt
 
 
 def members(request):
-    return HttpResponse("Hello world!")
+    return HttpResponse("Hello world!" + str(request.headers))
 
 def verProductos(request):
     '''Devolvemos json con todos los productos'''
@@ -17,15 +18,26 @@ def verProductos(request):
             producto = serialize('json', Producto.objects.filter(id__icontains=request.body))
             return JsonResponse(producto, safe=False)
 
+@csrf_exempt
 def productoId(request, id):
     '''Modificamos o devolvemos un producto por su Id'''
     if request.method == "GET":
         producto = serialize('json', Producto.objects.filter(id__icontains=id))
         return JsonResponse(producto, safe=False)
     elif request.method == "DELETE":
-        producto = serialize('json', Producto.objects.get(id_icontains=id).delete())
-        return JsonResponse(producto, safe=False)
+        producto = Producto.objects.filter(pk=id)
+        producto.delete()
+        return JsonResponse(f"Producto con id = {id}, borrado con exito", safe=False)
 
+    elif request.method == "PUT":
+        Producto.save(update_fields=["categoria", "nombre", "precio", "stock", "descripcion"])
+
+@csrf_exempt
+def productorBorrar(request):
+    '''Método para borrar todos los productos'''
+    if request.method == "DELETE":
+        Producto.objects.all().delete()
+        return JsonResponse("Todos los productos borrados", safe=False)
 
 #class verProductos(generic.ListView):
 #   model = Producto
