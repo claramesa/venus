@@ -1,4 +1,6 @@
 from rest_framework.authtoken.views import ObtainAuthToken
+
+import authentication
 from .models import Token
 from rest_framework.response import Response
 
@@ -20,7 +22,15 @@ class CustomAuthTokenLogin(ObtainAuthToken):
             'username': user.username
         })
 
-class who():
-    def get(request):
+class who(APIView):
+    '''
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAdminUser]
+    '''
+    authentication_classes = [authentication.ExpiringTokenAuthentication]
+    permission_classes = [authentication.ExpiringTokenAuthentication.authenticate_credentials]
+    
+    def get(self, request, format=None):
         print(request)
+        #usernames = [user.username for user in .objects.all()]
         return Response({"message": "who"}, 200)
