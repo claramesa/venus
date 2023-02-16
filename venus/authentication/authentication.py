@@ -5,20 +5,30 @@ from django.conf import settings
 from django.utils import timezone
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.authtoken.models import Token
+from .models import Token
 
 
 class ExpiringTokenAuthentication(TokenAuthentication):
     """
-    Expiring token for mobile and desktop clients.
-    It expires every {n} hrs requiring client to supply valid username 
-    and password for new one to be created.
+    La verificacion de que el token existe y es asignado a un usuario
     """
 
     model = Token
 
-    def authenticate_credentials(self, key, request=None):
+    def authenticate(self, request):
+        """
+
+        Args:
+            request (_type_): 
+
+        Raises:
+            AuthenticationFailed: La autorizacion del token con un usuario falla
+
+        Returns:
+            devuelve la informacion relacionada de ese token
+        """
         models = self.get_model()
+        key = request.META.get('HTTP_AUTHORIZATION')[7:]
 
         try:
             token = models.objects.select_related("user").get(key=key)

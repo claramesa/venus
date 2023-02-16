@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+#Se instala la aplicacion creada anteriormente de authentication y la app de django_expiring_token
 INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
@@ -126,18 +126,12 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REST_AUTH_TOKEN_MODEL = "authentication.models.Token"
-REST_AUTH_TOKEN_CREATOR = "authentication.models.custom_create_token"
-
 # Configuracion del token, the default value is 1 day
 EXPIRING_TOKEN_DURATION=timedelta(hours=168)
 
 # Configuracion de seguridad del token, para que tenga la funcion de expirar
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'django_expiring_token.authentication.ExpiringTokenAuthentication',
+        'authentication.authentication.ExpiringTokenAuthentication',
     )
 }
-
-#Hacemos que Django utilice CustomUser en lugar de su modelo genérico
-AUTH_USER_MODEL = "authentication.CustomUser"

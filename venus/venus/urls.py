@@ -19,7 +19,7 @@ from authentication import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('api/register/', RegisterAPI.as_view(), name='register'),
+    #Estas son las url relacionadas con el login de usuarios
     path('api-auth/', views.CustomAuthTokenLogin.as_view(), name="login"),
-    path('who', views.who, name="who")
+    path('api-auth/who', views.who.as_view(), name="who")
 ]
