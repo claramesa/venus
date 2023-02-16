@@ -100,7 +100,7 @@ export class LoginUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getAllUser().subscribe((param) => {
-      //console.log(param);
+      console.log(param);
 
     })
   }

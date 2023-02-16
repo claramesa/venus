@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
-
-    <div class="container justify-content-center align-items-center">
-
-
+  <body>
+    <div class="container vh-100 justify-content-center align-items-center">
+      <div class="row justify-content-center">
         <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-            <div class="form-group">
-                <label for="username">Usuario: </label>
-                <input id="username" type="text" (change)="onChangeInput($event)" formControlName="username">
+          <div class="form-group">
+            <label for="username" class="form-label">Usuario: </label>
+            <input
+              id="username"
+              class="form-control"
+              type="text"
+              (change)="onChangeInput($event)"
+              formControlName="username"
+              placeholder="Escriba el nombre de usuario"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Contraseña: </label>
+            <input
+              id="password"
+              class="form-control"
+              type="password"
+              formControlName="password"
+              placeholder="Escriba la contraseña"
+            />
+          </div>
+
+          <div *ngIf="errores.length != 0">
+            <div class="alert alert-danger">
+              <span>{{ errores[0] }}</span>
             </div>
+          </div>
 
-            <div class="form-group">
-                <label for="password">Contraseña: </label>
-                <input id="password" type="password" formControlName="password">
+          <div *ngIf="exito">
+            <div class="alert alert-success">
+              <span>Usuario Correcto</span>
             </div>
+          </div>
 
-
-            <div *ngIf="errores.length!=0;">
-
-                <div class="alert alert-danger">
-                    <span>{{errores[0]}}</span>
-                </div>
-
-            </div>
-
-            <div *ngIf="exito">
-
-                <div class="alert alert-success">
-                    <span>Usuario Correcto</span>
-                </div>
-            </div>
-
-
-            <button type="submit" [disabled]="!profileForm.valid" class="btn btn-primary">Acceder</button>
-
+          <div class="button">
+            <button
+              type="submit"
+              [disabled]="!profileForm.valid"
+              class="btn btn-primary col-12"
+            >
+              Acceder
+            </button>
+          </div>
         </form>
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>

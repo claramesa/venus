@@ -1,0 +1,35 @@
+body{
+    font-size: large;
+    background-color: aquamarine;
+}
+
+.row{
+    display: grid;
+    place-content: center;
+    padding: 0.5em;
+
+}
+
+.container{
+    display: flex;
+
+}
+
+.form-group input{
+    background-color: rgba(0, 255, 255, 0);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    display: inline-block;
+    border-width: 0px;
+}
+
+.form-control:focus{
+    border-bottom: 3px solid rgb(255, 255, 255);
+    box-shadow: none;
+}
+
+input, .button{
+    margin-bottom: 1.5em;
+}
