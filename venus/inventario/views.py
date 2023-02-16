@@ -11,11 +11,22 @@ def members(request):
     return HttpResponse("Hello world!" + str(request.headers))
 
 
-
 class ProductoManagement(APIView):
     def get(self, request):
         productos = Producto.objects.all().values()
         return Response(productos, 200)
+
+
+class ProductoManagementId(APIView):
+    def get(self, request, id):
+        productos = Producto.objects.filter(id__icontains=id).values()
+        return Response(productos, 200)
+    
+    def delete(self, request, id):
+        productoBorrar = Producto.objects.filter(id__icontains=id)
+        mostrar = productoBorrar.values()
+        productoBorrar.delete()
+        return Response(mostrar.values(), 200)
 
 
 @csrf_exempt
