@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'authentication.apps.AuthenticationConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -125,12 +126,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+REST_AUTH_TOKEN_MODEL = "authentication.models.Token"
+REST_AUTH_TOKEN_CREATOR = "authentication.models.custom_create_token"
+
 # Configuracion del token, the default value is 1 day
 EXPIRING_TOKEN_DURATION=timedelta(hours=168)
 
 # Configuracion de seguridad del token, para que tenga la funcion de expirar
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'django_expiring_token.authentication.ExpiringTokenAuthentication'
+        'django_expiring_token.authentication.ExpiringTokenAuthentication',
     )
 }
