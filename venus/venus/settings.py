@@ -27,11 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    
+}
 # Application definition
 
 INSTALLED_APPS = [
     'inventario.apps.InventarioConfig',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

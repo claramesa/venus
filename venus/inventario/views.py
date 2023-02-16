@@ -3,22 +3,20 @@ from django.http import HttpResponse
 from .models import Producto
 from django.core.serializers import serialize
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 
 def members(request):
     return HttpResponse("Hello world!" + str(request.headers))
 
-@csrf_exempt
-def verProductos(request):
-    '''Devolvemos json con todos los productos'''
-    if request.method == "GET":
-        productos = serialize('json', Producto.objects.all())
-        return JsonResponse(productos, safe=False)
-    
-    elif request.method == "DELETE":
-        '''Método para borrar todos los productos'''
-        Producto.objects.all().delete()
-        return JsonResponse("Todos los productos borrados", safe=False)
+
+
+class ProductoManagement(APIView):
+    def get(self, request):
+        productos = Producto.objects.all().values()
+        return Response(productos, 200)
+
 
 @csrf_exempt
 def productoId(request, id):
