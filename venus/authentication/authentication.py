@@ -5,6 +5,7 @@ from django.conf import settings
 from django.utils import timezone
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.exceptions import AuthenticationFailed
+
 from .models import Token
 
 
@@ -19,7 +20,7 @@ class ExpiringTokenAuthentication(TokenAuthentication):
         """
 
         Args:
-            request (_type_): 
+            request (_type_):
 
         Raises:
             AuthenticationFailed: La autorizacion del token con un usuario falla
@@ -28,7 +29,7 @@ class ExpiringTokenAuthentication(TokenAuthentication):
             devuelve la informacion relacionada de ese token
         """
         models = self.get_model()
-        key = request.META.get('HTTP_AUTHORIZATION')
+        key = request.META.get("HTTP_AUTHORIZATION")
         if key is None:
             raise AuthenticationFailed(
                 {"error": "Invalid or Inactive Token", "is_authenticated": False}
@@ -46,7 +47,7 @@ class ExpiringTokenAuthentication(TokenAuthentication):
             raise AuthenticationFailed(
                 {"error": "Invalid user", "is_authenticated": False}
             )
-        #REQUIRED_FIELDS = ['username', 'password']  # new
+        # REQUIRED_FIELDS = ['username', 'password']  # new
 
         utc_now = timezone.now()
         utc_now = utc_now.replace(tzinfo=pytz.utc)
