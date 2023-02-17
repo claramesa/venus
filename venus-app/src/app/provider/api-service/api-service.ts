@@ -15,37 +15,12 @@ export class ApiServiceProvider {//implements HttpInterceptor
     constructor(public http: HttpClient) { }
 
     authenticatedusuario() {
-        return localStorage.getItem("user");
+        return localStorage.getItem("user_token");
     }//end_auth
 
     getAllUser(): Observable<[]> {
         return this.http.get<any>(`${this.URL}`);
     }//end_all_user
-
-    getUsuarioApiMock(user: Usuario) {
-        var usuarioVar: Usuario;
-        let promise = new Promise<any>((resolve, reject) => {
-            this.http.get(this.URL).toPromise()
-                .then((data: any) => {
-                    usuarioVar = data.map((res: Usuario) => {
-                        if (res.username === user.username) {
-                            if (res.password === user.password) {
-                                localStorage.setItem("user_token", JSON.stringify("__TOKEN__"));
-                                resolve({ "user": true, "message": "Usuario correcto" });
-                            }
-                            reject({ "user": false, "message": "Contraseña incorrecta" });
-                        }
-                        reject({ "user": false, "message": "No existe el usuario" });
-                    });
-
-                })
-                .catch((error: Error) => {
-                    reject(error.message);
-                });
-        });
-
-        return promise;
-    }//end_usuario
 
     
     checkUser(user: Usuario) {
