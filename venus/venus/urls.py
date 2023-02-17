@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
-from inventario import views
+from inventario import views as vInv
+from empleados import views as vEmp
 
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
-    path('productos/', views.ProductoManagement.as_view()),
-    path('productos/<int:id>', views.ProductoManagementId.as_view()),
-    path('empleados/', views.ProductoManagement.as_view()),
-    path('empleados/<int:id>', views.ProductoManagementId.as_view())
+    path('productos/', vInv.ProductoManagement.as_view()),
+    path('productos/<int:id>', vInv.ProductoManagementId.as_view()),
+    path('empleados/', vEmp.EmpleadoManagement.as_view()),
+    path('empleados/<int:id>', vEmp.EmpleadoManagementId.as_view())
 ]
