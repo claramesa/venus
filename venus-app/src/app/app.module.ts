@@ -18,11 +18,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     HttpClientModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
+    AppRoutingModule
+   /* RouterModule.forRoot([
      
       {path: 'login', component: LoginUserComponent},
       {path: '', redirectTo: '/login', pathMatch: 'full'},
-    ]),
+    ])*/
   ],
   providers: [ ApiServiceProvider],
   bootstrap: [AppComponent]

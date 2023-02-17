@@ -11,6 +11,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class LoginUserComponent implements OnInit {
 
+  static token:any="";
   //formulario
   profileForm = this.fb.group({
     username: ['', Validators.required],
@@ -25,36 +26,29 @@ export class LoginUserComponent implements OnInit {
   }
 
   //Consulta el usuario a la api y comprueba si es correcto
-  consultar(user: Usuario) {
-    this.api.getUsuario(user).then((res) => {
-      if (res.user) {
-        this.exito = true;
-        Swal.fire({
-          title: 'Correcto',
-          text: `Buenas ${user.username}`,
-          imageUrl: 'https://unsplash.it/400/200',
-          imageWidth: 400,
-          imageHeight: 200,
-          imageAlt: 'Custom image',
-        })
-      }
-
-    }).catch((error) => {
-      console.log(error);
-      if (!error.user) {
-        let meensajeError: string = error.message;
-        this.errores.push(meensajeError);
-        Swal.fire({
-          title: 'Error',
-          text: `No puedes acceder`,
-          imageUrl: 'https://unsplash.it/400/200',
-          imageWidth: 400,
-          imageHeight: 200,
-          imageAlt: 'Custom image',
-        })
-      }
+  consultar(token:any) {
+  this.api.findUser(token).subscribe((data:any)=>{
+    this.exito = true;
+    Swal.fire({
+      title: 'Correcto',
+      text: `Buenas ${data.username}`,
+      imageUrl: 'https://unsplash.it/400/200',
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: 'Custom image',
     })
-
+  },(err)=>{
+    Swal.fire({
+      title: 'Error',
+      text: `No puedes acceder`,
+          imageUrl: 'https://unsplash.it/400/200',
+          imageWidth: 400,
+          imageHeight: 200,
+          imageAlt: 'Custom image',
+    })
+  }
+   
+  );
   }
 
   //Cambio de cada input controlando el evento 
@@ -69,9 +63,8 @@ export class LoginUserComponent implements OnInit {
     this.exito = false;
     user.username = this.profileForm.value.username ? this.profileForm.value.username : "";
     user.password = this.profileForm.value.password ? this.profileForm.value.password : "";
-    this.consultar(user);
+    this.login();
   }
-
   /* emailDomainValidator(control: FormControl) { 
      let email = control.value; 
      if (email && email.indexOf("@") != -1) { 
@@ -87,22 +80,27 @@ export class LoginUserComponent implements OnInit {
      return null; 
    }*/
 
-
-  login() {
+  async login() {
     let user: Usuario = new Usuario(0, "", "")
     user.username = this.profileForm.value.username ? this.profileForm.value.username : "";
     user.password = this.profileForm.value.password ? this.profileForm.value.password : "";
-    this.api.checkUser(user).subscribe((data) => {
-      console.log(data);
-    })
-
+    await this.api.checkUser(user).subscribe((data:any) => {
+        localStorage.setItem("user_token",JSON.stringify(data.token));
+        this.consultar(data.token); 
+        }, (err) => {
+          Swal.fire({
+            title: 'Error',
+            text: `No puedes acceder`,
+                imageUrl: 'https://unsplash.it/400/200',
+                imageWidth: 400,
+                imageHeight: 200,
+                imageAlt: 'Custom image',
+          })
+    });
   }
 
   ngOnInit(): void {
-    this.api.getAllUser().subscribe((param) => {
-      console.log(param);
-
-    })
+  
   }
 
 
