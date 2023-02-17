@@ -1,6 +1,7 @@
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.exceptions import AuthenticationFailed
 
 from .models import Token
 
@@ -31,13 +32,7 @@ class CustomAuthTokenLogin(ObtainAuthToken):
         return Response(
             {"token": token.key, "id_user": user.pk, "username": user.username}
         )
-
-
-class who(APIView):
-    """
-    Mediante un token que nos devuelva a que usuario le correesponde
-    """
-
+    
     def get(self, request):
         """_summary_
             Mediante un token nos devuelve quien es
@@ -47,6 +42,10 @@ class who(APIView):
         Returns:
             Devuelve si es correspondiente el token con un usuario, devuelve los datos del usuario
         """
+        if request.META.get("HTTP_AUTHORIZATION") is None:
+            raise AuthenticationFailed(
+                {"error": "Invalid or Inactive Token", "is_authenticated": False}
+            )
         return Response(
             {
                 "username": request.user.username,
@@ -55,3 +54,4 @@ class who(APIView):
             },
             200,
         )
+

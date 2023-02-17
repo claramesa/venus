@@ -30,6 +30,14 @@ class ExpiringTokenAuthentication(TokenAuthentication):
         """
         models = self.get_model()
         key = request.META.get("HTTP_AUTHORIZATION")
+        """
+
+        Raises:
+            AuthenticationFailed: error de no poner token
+
+        Returns:
+            me devuelve los valores relacionados con el token
+        """
         if key is None:
             raise AuthenticationFailed(
                 {"error": "Invalid or Inactive Token", "is_authenticated": False}
