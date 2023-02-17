@@ -1,10 +1,16 @@
 from django.http import JsonResponse
 from django.http import HttpResponse
+<<<<<<< remotes/origin/bbdd
 from .models import Empleado
 from django.core.serializers import serialize
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
+=======
+from django.shortcuts import render
+from rest_framework.response import Response
+from venus.empleados.models import Empleado
+>>>>>>> local
 
 # Create your views here.
 def members(request):
