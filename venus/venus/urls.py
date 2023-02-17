@@ -24,4 +24,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('productos/', views.ProductoManagement.as_view()),
     path('productos/<int:id>', views.ProductoManagementId.as_view()),
+    path('empleados/', views.ProductoManagement.as_view()),
+    path('empleados/<int:id>', views.ProductoManagementId.as_view())
 ]
