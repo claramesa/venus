@@ -6,46 +6,45 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-
-def members(request):
-    return HttpResponse("Hello world!" + str(request.headers))
-
-
 class ProductoManagement(APIView):
     def get(self, request):
         productos = Producto.objects.all().values()
         return Response(productos, 200)
+    
+    def post(self, request):
+        try:
+            productoNuevo = Producto()
+            productoNuevo.categoria = request.data['categoria']
+            productoNuevo.nombre = request.data['nombre']
+            productoNuevo.descripcion = request.data['descripcion']
+            productoNuevo.precio = request.data['precio']
+            productoNuevo.stock = request.data['stock']
+            productoNuevo.save()
+        except Exception:
+            return Response(f"ERROR DE INSERCIÓN {productoNuevo}", 500)
+        return (productoNuevo, 201)
+
 
 
 class ProductoManagementId(APIView):
     def get(self, request, id):
-        productos = Producto.objects.filter(id__icontains=id).values()
-        return Response(productos, 200)
+        try:
+            producto = Producto.objects.get(id__icontains=id).values()
+        except Exception:
+            return Response(f"ERROR - PROD {id}", 404)
+        return Response(producto, 201)
     
     def delete(self, request, id):
-        productoBorrar = Producto.objects.filter(id__icontains=id)
+        try:
+            productoBorrar = Producto.objects.get(id__icontains=id)
+        except Exception:
+            return Response(f"ERROR - PROD {id}", 404)
+        
         mostrar = productoBorrar.values()
-        productoBorrar.delete()
-        return Response(mostrar.values(), 200)
+        try:
+            productoBorrar.delete()
+        except Exception:
+            return Response(f"ERROR DE BORRADO - PROD {id}", 500)
+        
+        return Response(mostrar, 201)
 
-
-@csrf_exempt
-def productoId(request, id):
-    '''Modificamos o devolvemos un producto por su Id'''
-    if request.method == "GET":
-        producto = serialize('json', Producto.objects.filter(id__icontains=id))
-        return JsonResponse(producto, safe=False)
-    elif request.method == "DELETE":
-        producto = Producto.objects.filter(pk=id)
-        producto.delete()
-        return JsonResponse(f"Producto con id = {id}, borrado con exito", safe=False)
-
-    elif request.method == "PUT":
-        Producto.save(self=request.body )
-        return JsonResponse(f"Producto añadido", safe=False)
-
-
-#class verProductos(generic.ListView):
-#   model = Producto
-#   context_object_name = 'product_list'   # your own name for the list as a template variable
-    #template_name = 'books/my_arbitrary_template_name_list.html'  # Specify your own template name/location
