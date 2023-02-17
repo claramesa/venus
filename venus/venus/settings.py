@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-%!1n8h+^u0pk$l4ak1r#pleo18ci*ae6ql6v!a7#8s3sm=oz_$
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+#Para habilitar que se conecten
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_expiring_token',
+    "corsheaders"
 ]
 
 
@@ -47,11 +48,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL=True
 
 ROOT_URLCONF = 'venus.urls'
 
@@ -128,6 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuracion del token, the default value is 1 day
 EXPIRING_TOKEN_DURATION=timedelta(hours=168)
+#EXPIRING_TOKEN_DURATION=timedelta(seconds=3)
 
 # Configuracion de seguridad del token, para que tenga la funcion de expirar
 REST_FRAMEWORK = {

@@ -12,7 +12,6 @@ class Token(AuthToken):
     La clase que define nuestro token
     """
     key = models.CharField("Key", max_length=40, db_index=True, unique=True)
-    print(settings.AUTH_USER_MODEL)
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE

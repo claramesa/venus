@@ -28,7 +28,12 @@ class ExpiringTokenAuthentication(TokenAuthentication):
             devuelve la informacion relacionada de ese token
         """
         models = self.get_model()
-        key = request.META.get('HTTP_AUTHORIZATION')[7:]
+        key = request.META.get('HTTP_AUTHORIZATION')
+        if key is None:
+            raise AuthenticationFailed(
+                {"error": "Invalid or Inactive Token", "is_authenticated": False}
+            )
+        key = key[7:]
 
         try:
             token = models.objects.select_related("user").get(key=key)
@@ -46,7 +51,7 @@ class ExpiringTokenAuthentication(TokenAuthentication):
         utc_now = timezone.now()
         utc_now = utc_now.replace(tzinfo=pytz.utc)
 
-        if token.created < utc_now - datetime.timedelta(days=7):
+        if token.created < utc_now - settings.EXPIRING_TOKEN_DURATION:
             raise AuthenticationFailed(
                 {"error": "Token has expired", "is_authenticated": False}
             )

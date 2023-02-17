@@ -51,6 +51,6 @@ class who(APIView):
         return Response(
             {
                 "username": request.user.username,
-                "isAdmin": request.user.is_superuser,
+                "is_admin": request.user.is_superuser,
                 "token": request.META.get('HTTP_AUTHORIZATION')[7:]
             }, 200)

@@ -21,5 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #Estas son las url relacionadas con el login de usuarios
     path('api-auth/', views.CustomAuthTokenLogin.as_view(), name="login"),
-    path('api-auth/who', views.who.as_view(), name="who")
+    path('api-auth', views.who.as_view(), name="who")
 ]
