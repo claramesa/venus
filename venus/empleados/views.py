@@ -8,14 +8,14 @@ class EmpleadoManagement(APIView):
         empleados = Empleado.objects.all().values()
         return Response(empleados, 200)
     def post(self, request):
+        empleadoMod = Empleado() 
+        empleadoMod.nif = request.data['nif']
+        empleadoMod.nombre = request.data['nombre']
+        empleadoMod.fecha_nac = request.data['fecha_nac']
+        empleadoMod.correo = request.data['correo']
+        empleadoMod.telefono = request.data['telefono']
+        empleadoMod.rol = request.data['rol']
         try:
-            empleadoMod = Empleado() 
-            empleadoMod.nif = request.data['nif']
-            empleadoMod.nombre = request.data['nombre']
-            empleadoMod.fecha_nac = request.data['fecha_nac']
-            empleadoMod.correo = request.data['correo']
-            empleadoMod.telefono = request.data['telefono']
-            empleadoMod.rol = request.data['rol']
             empleadoMod.save()
         except Exception as e:
             print(e)
