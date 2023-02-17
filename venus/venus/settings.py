@@ -36,6 +36,7 @@ REST_FRAMEWORK = {
 
 INSTALLED_APPS = [
     'inventario.apps.InventarioConfig',
+    'empleados.apps.EmpleadosConfig',
     'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
