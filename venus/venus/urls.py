@@ -26,6 +26,8 @@ urlpatterns = [
     path('producto/<int:id>', vInv.ProductoManagementId.as_view()),
     path('empleados/', vEmp.EmpleadoManagement.as_view()),
     path('empleado/<int:id>', vEmp.EmpleadoManagementId.as_view()),
-    path('categorias/', vInv.ProductoManagement.as_view()),
-    path('categoria/<int:id>', vInv.ProductoManagementId.as_view())
+    path('categorias/', vInv.CategoriaManagement.as_view()),
+    path('categoria/<int:id>', vInv.CategoriaManagementId.as_view()),
+    path('productosc/<int:id>', vInv.ProductoManagementCategoria.as_view())
+
 ]

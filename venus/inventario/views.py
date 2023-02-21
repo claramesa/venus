@@ -206,6 +206,15 @@ class CategoriaManagementId(APIView):
 
 class ProductoManagementCategoria(APIView):
     def get(self, request, id):
+        """Funcion para buscar prodcutos por categoría
+
+        Args:
+            request
+            id (num): Id de categoría
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             productosPorCategoria = Producto.objects.filter(categoria__icontains=id)
         except Exception as e:
