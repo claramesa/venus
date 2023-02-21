@@ -46,4 +46,17 @@ class ProductoManagementId(APIView):
             return Response({"error": f"ERROR DE BORRADO - PROD {id}"}, 500)
         
         return Response(model_to_dict(productoBorrar), 201)
+    
+    def put(self, request, id):
+        try:
+            productoModificado = Producto.objects.get(id__icontains=id)
+            productoModificado.categoria = Categoria.objects.get(pk=request.data['categoria']) 
+            productoModificado.nombre = request.data['nombre']
+            productoModificado.descripcion = request.data['descripcion']
+            productoModificado.precio = request.data['precio']
+            productoModificado.stock = request.data['stock']
+            productoModificado.save()
+        except Exception as e:
+            return Response({'error': 'ERROR DE MODIFY: ' + e}, 500)
+        return Response({'modificado': model_to_dict(productoModificado)}, 201)
 
