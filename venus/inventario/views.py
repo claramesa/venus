@@ -83,7 +83,7 @@ class CategoriaManagementId(APIView):
             categoria = model_to_dict(Categoria.objects.get(id__icontains=id))
         except Exception:
             return Response({"error": f"ERROR - CAT {id}"}, 404)
-        return Response(categoria, 201)
+        return Response({'busuqeda': model_to_dict(categoria)}, 201)
     
     def delete(self, request, id):
         try:
@@ -107,3 +107,11 @@ class CategoriaManagementId(APIView):
             return Response({'error': 'ERROR DE MODIFY: ' + e}, 500)
         return Response({'modificado': model_to_dict(categoriaModificado)}, 201)
 
+
+class ProductoManagementCategoria(APIView):
+    def get(self, request, id):
+        try:
+            productosPorCategoria = Producto.objects.filter(categoria__icontains=id)
+        except Exception as e:
+            return Response({'error': 'ERROR DE BÚSQUEDA ' + e}, 500)
+        return Response({'busuqeda': model_to_dict(productosPorCategoria)}, 201)
