@@ -8,11 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { ApiServiceProvider } from './provider/api-service/api-service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomeVenusComponent } from './home-venus/home-venus.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginUserComponent,
+    HomeVenusComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
