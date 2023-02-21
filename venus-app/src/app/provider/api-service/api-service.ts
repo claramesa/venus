@@ -25,16 +25,14 @@ export class ApiServiceProvider {//implements HttpInterceptor
     
     checkUser(user: Usuario) {
        const headers= new HttpHeaders()
-         .set('content-type', 'application/json; charset=utf-8')
-        /* .set('Access-Control-Allow-Origin', 'always')*/
+         
         /* .set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')*/
          ;
                 const body = {
             'username': user.username,
             'password': user.password
         }
-        return this.http.post(this.URLDjango + "/api-auth/", body, {headers}).pipe(catchError(this.errorHandler))
-
+        return this.http.post<any>(this.URLDjango + `/api-auth/${""}`, body);
       
 
     }//end_user_django

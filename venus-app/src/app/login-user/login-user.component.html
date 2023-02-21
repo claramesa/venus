@@ -9,9 +9,12 @@
 
   <body>
     <div class="container vh-100 justify-content-center align-items-center">
-      <div class="row justify-content-center">
-        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="row justify-content-center border">
+        <form class="formulario" [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          <header class="header h2 text-center">Login</header>
+          <div class="linea"></div>
           <div class="form-group">
+            <i class="icon bi bi-person-circle"></i>
             <label for="username" class="form-label">Usuario: </label>
             <input
               id="username"
@@ -22,9 +25,9 @@
               placeholder="Escriba el nombre de usuario"
             />
           </div>
-          <i class="bi bi-search"></i>
 
           <div class="form-group">
+            <i class="icon bi bi-pass-fill"></i>
             <label for="password" class="form-label">Contraseña: </label>
             <input
               id="password"
@@ -51,14 +54,14 @@
             <button
               type="submit"
               [disabled]="!profileForm.valid"
-              class="btn btn-primary col-12"
+              class="btn col-12"
             >
               Acceder
             </button>
           </div>
+          <div class="linea"></div>
         </form>
       </div>
     </div>
-  
   </body>
 </html>

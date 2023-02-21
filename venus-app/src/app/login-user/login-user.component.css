@@ -1,35 +1,57 @@
-body{
-    font-size: large;
-    background-color: aquamarine;
+body {
+  font-size: large;
+  background-image: -moz-linear-gradient(#d36bff, #896bff);
+  background-image: linear-gradient(#d36bff, #896bff);
 }
 
-.row{
-    display: grid;
-    place-content: center;
-    padding: 0.5em;
-
+.row {
+  display: grid;
+  place-content: center;
+  padding: 0.5em;
 }
 
-.container{
-    display: flex;
-
+.container {
+  display: flex;
 }
 
-.form-group input{
-    background-color: rgba(0, 255, 255, 0);
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    border-radius: 0;
-    display: inline-block;
-    border-width: 0px;
+.form-group input {
+  background-color: rgba(0, 255, 255, 0);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+  display: inline-block;
+  border-width: 1px;
 }
 
-.form-control:focus{
-    border-bottom: 3px solid rgb(255, 255, 255);
-    box-shadow: none;
+.form-group input::placeholder {
+  color: #ffffff;
 }
 
-input, .button{
-    margin-bottom: 1.5em;
+.form-control:focus {
+  border-bottom: 3px solid rgb(255, 255, 255);
+  box-shadow: none;
+}
+
+input,
+.button {
+  margin-bottom: 1.5em;
+}
+
+.button button {
+  background-color: #6ae3ff;
+}
+
+.linea {
+  background-color: #f1d7ff;
+  padding: 0.1em;
+  margin: 0.25em;
+}
+
+.icon {
+  margin-right: 0.5em;
+}
+
+.formulario{
+    padding: 1em;
 }
