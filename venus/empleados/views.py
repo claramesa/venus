@@ -33,3 +33,18 @@ class EmpleadoManagementId(APIView):
         empleadoBorrar.delete()
         return Response(mostrar.values(), 200)
     
+    def put(self, request, id):
+        empleadoModify = Empleado.objects.get(id__contains = id)
+        empleadoModify.nif = request.data['nif']
+        empleadoModify.nombre = request.data['nombre']
+        empleadoModify.fecha_nac = request.data['fecha_nac']
+        empleadoModify.correo = request.data['correo']
+        empleadoModify.telefono = request.data['telefono']
+        empleadoModify.rol = request.data['rol']
+        try:
+            empleadoModify.save()
+        except Exception as e:
+            print(e)
+            return Response({"error": e}, 500)
+        return Response({"modificado": model_to_dict(empleadoModify)}, 200)
+    
