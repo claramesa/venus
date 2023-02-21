@@ -45,7 +45,7 @@ class ProductoManagementId(APIView):
         except Exception:
             return Response({"error": f"ERROR DE BORRADO - PROD {id}"}, 500)
         
-        return Response(model_to_dict(productoBorrar), 201)
+        return Response({'borrado': model_to_dict(productoBorrar)}, 201)
     
     def put(self, request, id):
         try:
@@ -96,7 +96,7 @@ class CategoriaManagementId(APIView):
         except Exception:
             return Response({"error": f"ERROR DE BORRADO - CAT {id}"}, 500)
         
-        return Response(model_to_dict(categoriaBorrar), 201)
+        return Response({'borrado': model_to_dict(categoriaBorrar)}, 201)
     
     def put(self, request, id):
         try:

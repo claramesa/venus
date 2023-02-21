@@ -23,7 +23,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('admin/', admin.site.urls),
     path('productos/', vInv.ProductoManagement.as_view()),
-    path('productos/<int:id>', vInv.ProductoManagementId.as_view()),
+    path('producto/<int:id>', vInv.ProductoManagementId.as_view()),
     path('empleados/', vEmp.EmpleadoManagement.as_view()),
-    path('empleados/<int:id>', vEmp.EmpleadoManagementId.as_view())
+    path('empleado/<int:id>', vEmp.EmpleadoManagementId.as_view()),
+    path('categorias/', vInv.ProductoManagement.as_view()),
+    path('categoria/<int:id>', vInv.ProductoManagementId.as_view())
 ]
