@@ -1,9 +1,19 @@
+"""Vistas para Empleados
+
+    Autors: Roberto Ruiz
+            Adán Agirre
+            Maria José Valverde
+
+    Date: 21/02/2023
+"""
 from .models import Empleado
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.forms.models import model_to_dict
 
 class EmpleadoManagement(APIView):
+    """Clase donde estan las funciones simples
+    """
     def get(self, request):
         """Funcion para obtener todos los empleados
 
@@ -39,6 +49,8 @@ class EmpleadoManagement(APIView):
         return Response({"insertado": model_to_dict(empleadoMod)}, 200)
 
 class EmpleadoManagementId(APIView):
+    """Clase donde se alojan las funciones que necesitan id
+    """
     def get(self, request, id):
         """Funcion para obtener el empleado pasandole el id
 

@@ -1,16 +1,40 @@
+"""Vistas para Productos y Categorias
 
+    Autors: Roberto Ruiz
+            Adán Agirre
+            Maria José Valverde
+
+    Date: 21/02/2023
+"""
 from .models import Producto, Categoria
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 from django.forms.models import model_to_dict
 
 class ProductoManagement(APIView):
+    """Clase donde estan las funciones simples
+    """
     def get(self, request):
+        """Funcion para obtener todos los productos
+
+        Args:
+            request
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         productos = Producto.objects.all().values()
         return Response(productos, 200)
     
     def post(self, request):
+        """Funcion para insertar nuevo producto
+
+        Args:
+            request
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             productoNuevo = Producto()
             productoNuevo.categoria = Categoria.objects.get(pk=request.data['categoria']) 
@@ -27,7 +51,18 @@ class ProductoManagement(APIView):
 
 
 class ProductoManagementId(APIView):
+    """Clase donde se alojan las funciones que necesitan id
+    """
     def get(self, request, id):
+        """Funcion para obtener un producto por id
+
+        Args:
+            request
+            id (num): Id del producto
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             producto = model_to_dict(Producto.objects.get(id__icontains=id))
         except Exception:
@@ -35,6 +70,15 @@ class ProductoManagementId(APIView):
         return Response(producto, 201)
     
     def delete(self, request, id):
+        """Funcion para eliminar un producto por id
+
+        Args:
+            request
+            id (num): Id del producto
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             productoBorrar = Producto.objects.get(id__icontains=id)
         except Exception:
@@ -48,6 +92,15 @@ class ProductoManagementId(APIView):
         return Response({'borrado': model_to_dict(productoBorrar)}, 201)
     
     def put(self, request, id):
+        """Funcion para modificar un producto por id
+
+        Args:
+            request
+            id (num): Id del producto
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             productoModificado = Producto.objects.get(id__icontains=id)
             productoModificado.categoria = Categoria.objects.get(pk=request.data['categoria']) 
@@ -62,10 +115,26 @@ class ProductoManagementId(APIView):
     
 class CategoriaManagement(APIView):
     def get(self, request):
+        """Funcion para obtener todas las categorias
+
+        Args:
+            request
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         categorias = Categoria.objects.all().values()
         return Response(categorias, 200)
     
     def post(self, request):
+        """Funcion para crear una nueva categoria
+
+        Args:
+            request
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             categoriaNuevo = Categoria()
             categoriaNuevo.nombre = request.data['nombre']
@@ -79,6 +148,15 @@ class CategoriaManagement(APIView):
 
 class CategoriaManagementId(APIView):
     def get(self, request, id):
+        """Funcion para obtener una categoria por id
+
+        Args:
+            request
+            id (num): Id del producto
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             categoria = model_to_dict(Categoria.objects.get(id__icontains=id))
         except Exception:
@@ -86,6 +164,15 @@ class CategoriaManagementId(APIView):
         return Response(categoria, 201)
     
     def delete(self, request, id):
+        """Funcion para eliminar una categoria por id
+
+        Args:
+            request
+            id (num): Id del producto
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             categoriaBorrar = Categoria.objects.get(id__icontains=id)
         except Exception:
@@ -99,6 +186,15 @@ class CategoriaManagementId(APIView):
         return Response({'borrado': model_to_dict(categoriaBorrar)}, 201)
     
     def put(self, request, id):
+        """Funcion para modificar una categoria por id
+
+        Args:
+            request
+            id (num): Id del producto
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         try:
             categoriaModificado = Categoria.objects.get(id__icontains=id)
             categoriaModificado.nombre = request.data['nombre']
