@@ -10,6 +10,7 @@ import { ApiServiceProvider } from './provider/api-service/api-service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeVenusComponent } from './home-venus/home-venus.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FootbarComponent } from './footbar/footbar.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginUserComponent,
     HomeVenusComponent,
     NavbarComponent,
+    FootbarComponent,
   ],
   imports: [
     BrowserModule,
