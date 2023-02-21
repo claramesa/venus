@@ -59,4 +59,51 @@ class ProductoManagementId(APIView):
         except Exception as e:
             return Response({'error': 'ERROR DE MODIFY: ' + e}, 500)
         return Response({'modificado': model_to_dict(productoModificado)}, 201)
+    
+class CategoriaManagement(APIView):
+    def get(self, request):
+        categorias = Categoria.objects.all().values()
+        return Response(categorias, 200)
+    
+    def post(self, request):
+        try:
+            categoriaNuevo = Categoria()
+            categoriaNuevo.nombre = request.data['nombre']
+            categoriaNuevo.save()
+        except Exception as e:
+            print(e)
+            return Response({"error": e}, 500)
+        return Response({"insertado": model_to_dict(categoriaNuevo)}, 201)
+
+
+
+class CategoriaManagementId(APIView):
+    def get(self, request, id):
+        try:
+            categoria = model_to_dict(Categoria.objects.get(id__icontains=id))
+        except Exception:
+            return Response({"error": f"ERROR - CAT {id}"}, 404)
+        return Response(categoria, 201)
+    
+    def delete(self, request, id):
+        try:
+            categoriaBorrar = Categoria.objects.get(id__icontains=id)
+        except Exception:
+            return Response({"error": f"ERROR - CAT {id}"}, 404)
+        
+        try:
+            categoriaBorrar.delete() 
+        except Exception:
+            return Response({"error": f"ERROR DE BORRADO - CAT {id}"}, 500)
+        
+        return Response(model_to_dict(categoriaBorrar), 201)
+    
+    def put(self, request, id):
+        try:
+            categoriaModificado = Categoria.objects.get(id__icontains=id)
+            categoriaModificado.nombre = request.data['nombre']
+            categoriaModificado.save()
+        except Exception as e:
+            return Response({'error': 'ERROR DE MODIFY: ' + e}, 500)
+        return Response({'modificado': model_to_dict(categoriaModificado)}, 201)
 
