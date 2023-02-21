@@ -5,9 +5,25 @@ from django.forms.models import model_to_dict
 
 class EmpleadoManagement(APIView):
     def get(self, request):
+        """Funcion para obtener todos los empleados
+
+        Args:
+            request
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         empleados = Empleado.objects.all().values()
         return Response(empleados, 200)
     def post(self, request):
+        """Funcion para insertar un nuevo empleado
+
+        Args:
+            request
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         empleadoMod = Empleado() 
         empleadoMod.nif = request.data['nif']
         empleadoMod.nombre = request.data['nombre']
@@ -24,16 +40,43 @@ class EmpleadoManagement(APIView):
 
 class EmpleadoManagementId(APIView):
     def get(self, request, id):
+        """Funcion para obtener el empleado pasandole el id
+
+        Args:
+            request
+            id (num): Id del empleado
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         empleados = Empleado.objects.get(id__icontains=id).values()
         return Response(empleados, 200)
     
     def delete(self, request, id):
+        """Funcion para eliminar empleado pasandole un id
+
+        Args:
+            request
+            id (num): Id del empleado
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         empleadoBorrar = Empleado.objects.filter(id__icontains=id)
         mostrar = empleadoBorrar.values()
         empleadoBorrar.delete()
         return Response(mostrar.values(), 200)
     
     def put(self, request, id):
+        """Funcion para modificar un empleado
+
+        Args:
+            request
+            id (num): Id del empleado
+
+        Returns:
+            Response: Codigo de como ha resultado el metodo
+        """
         empleadoModify = Empleado.objects.get(id__contains = id)
         empleadoModify.nif = request.data['nif']
         empleadoModify.nombre = request.data['nombre']
