@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { FootbarComponent } from './footbar/footbar.component';
 import { HomeVenusComponent } from './home-venus/home-venus.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 
@@ -9,14 +10,14 @@ var routes: Routes = [];
 //Si esta activo cambia el route
 if(local){
    routes= [
-    { path: '', component: HomeVenusComponent },
+    { path: '', component: FootbarComponent },
     
 
   ];
 }else{
   console.log("Entada")
   routes= [
-    { path: '', component: HomeVenusComponent },
+    { path: '', component: FootbarComponent },
     { path: 'login', component: LoginUserComponent }
   ];
   
