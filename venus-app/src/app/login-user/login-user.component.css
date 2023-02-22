@@ -38,6 +38,10 @@ input,
   margin-bottom: 1.5em;
 }
 
+.button button:hover{
+  background-color: #f1d7ff;
+}
+
 .button button {
   background-color: #6ae3ff;
 }
@@ -49,6 +53,7 @@ input,
 }
 
 .icon {
+  padding: 0.25em 0.15em;
   margin-right: 0.5em;
 }
 

@@ -25,14 +25,13 @@ export class ApiServiceProvider {//implements HttpInterceptor
     
     checkUser(user: Usuario) {
        const headers= new HttpHeaders()
-         
         /* .set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')*/
-         ;
-                const body = {
+       const body = {
             'username': user.username,
             'password': user.password
         }
-        return this.http.post<any>(this.URLDjango + `/api-auth/${""}`, body);
+        return this.http.post(this.URLDjango + `/api-auth/`, body,{headers});
+        
       
 
     }//end_user_django
@@ -46,10 +45,10 @@ export class ApiServiceProvider {//implements HttpInterceptor
       If you need to add the JWT for each token, it will be better to use HttpInterceptor */
     findUser(paramToken: any) {
         const headers= new HttpHeaders()
-          .set('content-type', 'application/json; charset=utf-8')
+          //.set('content-type', 'application/json; charset=utf-8')
           .set('Authorization',  "Bearer "+ paramToken);
             
-         return this.http.get(this.URLDjango + "/api-auth",{headers});
+         return this.http.get(this.URLDjango + "/api-auth/",{headers});
  
      }//end_user_django
  

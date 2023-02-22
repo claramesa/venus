@@ -4,6 +4,7 @@ import { Usuario } from '../modelo/Usuario';
 import { ApiServiceProvider } from '../provider/api-service/api-service';
 import Swal from "sweetalert2"
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-user',
   templateUrl: './login-user.component.html',
@@ -21,13 +22,13 @@ export class LoginUserComponent implements OnInit {
   errores: String[] = []
   //Si es exito  muestra que es exito
   exito: boolean = false;
-  constructor(public api: ApiServiceProvider, private fb: FormBuilder) {
+  constructor(public api: ApiServiceProvider, private fb: FormBuilder, private router:Router) {
     this.errores = new Array();
   }
 
   //Consulta el usuario a la api y comprueba si es correcto
   consultar(token:any) {
-  this.api.findUser(token).subscribe((data:any)=>{
+    this.api.findUser(token).subscribe((data:any)=>{
     this.exito = true;
     Swal.fire({
       title: 'Correcto',
@@ -37,6 +38,11 @@ export class LoginUserComponent implements OnInit {
       imageHeight: 200,
       imageAlt: 'Custom image',
     })
+    setTimeout(()=>{
+      console.log("Entra")
+      this.router.navigate(['/', 'home']); 
+            
+    },500);
   },(err)=>{
     Swal.fire({
       title: 'Error',
@@ -84,12 +90,11 @@ export class LoginUserComponent implements OnInit {
     let user: Usuario = new Usuario(0, "", "")
     user.username = this.profileForm.value.username ? this.profileForm.value.username : "";
     user.password = this.profileForm.value.password ? this.profileForm.value.password : "";
-    this.api.checkUser(user).subscribe((data: any) => {
+    await this.api.checkUser(user).subscribe((data: any) => {
       let token = localStorage.setItem("user_token", JSON.stringify(data.token));
-  
-      console.log("Accedido");
-      ///  this.consultar(data.token); 
+      this.consultar(data.token); 
     }, (err) => {
+      localStorage.removeItem("user_token");
       Swal.fire({
         title: 'Error',
         text: `No puedes acceder`,
