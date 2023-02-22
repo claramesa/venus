@@ -1,8 +1,11 @@
 body {
   font-size: large;
-  background-image: -moz-linear-gradient(#d36bff, #896bff);
-  background-image: linear-gradient(#d36bff, #896bff);
+  background-image: -moz-linear-gradient(#6a3eff,#d36bff, #ff856a,#99ff6a);
+  background-image: linear-gradient(#a87bc7,#e0b0ff,#f1d7ff);
 }
+/*background-image: linear-gradient(#d36bff, #ffd06a, #6affd0);*/
+/*background-image: linear-gradient(#ff856a, #ffd06a, #6affd0, #6affd0);*/
+
 
 .row {
   display: grid;
@@ -38,12 +41,13 @@ input,
   margin-bottom: 1.5em;
 }
 
-.button button:hover{
+.button button:hover {
   background-color: #f1d7ff;
 }
 
 .button button {
   background-color: #6ae3ff;
+  border: 1px solid black;
 }
 
 .linea {
@@ -57,6 +61,11 @@ input,
   margin-right: 0.5em;
 }
 
-.formulario{
-    padding: 1em;
+.formulario {
+  padding: 1em;
+}
+
+.contenedor {
+  background-image: -moz-linear-gradient(#ff6be1,#d36bff, #896bff);
+  background-image: linear-gradient( #ff6be1, #d36bff, #896bff);
 }
