@@ -46,7 +46,7 @@ class ProductoManagement(APIView):
         except Exception as e:
             print(e)
             return Response({"error": e}, 500)
-        return Response({"insertado": model_to_dict(productoNuevo)}, 201)
+        return Response(model_to_dict(productoNuevo), 201)
 
 
 
@@ -67,7 +67,7 @@ class ProductoManagementId(APIView):
             producto = model_to_dict(Producto.objects.get(id__icontains=id))
         except Exception:
             return Response({"error": f"ERROR - PROD {id}"}, 404)
-        return Response(producto, 201)
+        return Response(model_to_dict(producto), 201)
     
     def delete(self, request, id):
         """Funcion para eliminar un producto por id
@@ -89,7 +89,7 @@ class ProductoManagementId(APIView):
         except Exception:
             return Response({"error": f"ERROR DE BORRADO - PROD {id}"}, 500)
         
-        return Response({'borrado': model_to_dict(productoBorrar)}, 201)
+        return Response(model_to_dict(productoBorrar), 201)
     
     def put(self, request, id):
         """Funcion para modificar un producto por id
@@ -111,7 +111,7 @@ class ProductoManagementId(APIView):
             productoModificado.save()
         except Exception as e:
             return Response({'error': 'ERROR DE MODIFY: ' + e}, 500)
-        return Response({'modificado': model_to_dict(productoModificado)}, 201)
+        return Response(model_to_dict(productoModificado), 201)
     
 class CategoriaManagement(APIView):
     def get(self, request):
@@ -142,7 +142,7 @@ class CategoriaManagement(APIView):
         except Exception as e:
             print(e)
             return Response({"error": e}, 500)
-        return Response({"insertado": model_to_dict(categoriaNuevo)}, 201)
+        return Response(model_to_dict(categoriaNuevo), 201)
 
 
 
@@ -161,7 +161,7 @@ class CategoriaManagementId(APIView):
             categoria = model_to_dict(Categoria.objects.get(id__icontains=id))
         except Exception:
             return Response({"error": f"ERROR - CAT {id}"}, 404)
-        return Response({'busuqeda': model_to_dict(categoria)}, 201)
+        return Response(categoria, 201)
     
     def delete(self, request, id):
         """Funcion para eliminar una categoria por id
@@ -183,7 +183,7 @@ class CategoriaManagementId(APIView):
         except Exception:
             return Response({"error": f"ERROR DE BORRADO - CAT {id}"}, 500)
         
-        return Response({'borrado': model_to_dict(categoriaBorrar)}, 201)
+        return Response(model_to_dict(categoriaBorrar), 201)
     
     def put(self, request, id):
         """Funcion para modificar una categoria por id
@@ -200,8 +200,8 @@ class CategoriaManagementId(APIView):
             categoriaModificado.nombre = request.data['nombre']
             categoriaModificado.save()
         except Exception as e:
-            return Response({'error': 'ERROR DE MODIFY: ' + e}, 500)
-        return Response({'modificado': model_to_dict(categoriaModificado)}, 201)
+            return Response({'error': 'ERROR DE MODIFY'}, 500)
+        return Response(model_to_dict(categoriaModificado), 201)
 
 
 class ProductoManagementCategoria(APIView):
@@ -216,7 +216,7 @@ class ProductoManagementCategoria(APIView):
             Response: Codigo de como ha resultado el metodo
         """
         try:
-            productosPorCategoria = Producto.objects.filter(categoria__icontains=id)
+            productosPorCategoria = Producto.objects.filter(categoria=id).values()
         except Exception as e:
-            return Response({'error': 'ERROR DE BÚSQUEDA ' + e}, 500)
-        return Response({'busuqeda': model_to_dict(productosPorCategoria)}, 201)
+            return Response({'error': f'ERROR DE BUSQUEDA {e}'}, 500)
+        return Response(productosPorCategoria, 201)

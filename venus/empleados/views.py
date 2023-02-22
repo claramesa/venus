@@ -25,6 +25,7 @@ class EmpleadoManagement(APIView):
         """
         empleados = Empleado.objects.all().values()
         return Response(empleados, 200)
+    
     def post(self, request):
         """Funcion para insertar un nuevo empleado
 
@@ -46,7 +47,7 @@ class EmpleadoManagement(APIView):
         except Exception as e:
             print(e)
             return Response({"error": e}, 500)
-        return Response({"insertado": model_to_dict(empleadoMod)}, 200)
+        return Response(model_to_dict(empleadoMod), 200)
 
 class EmpleadoManagementId(APIView):
     """Clase donde se alojan las funciones que necesitan id
@@ -75,9 +76,8 @@ class EmpleadoManagementId(APIView):
             Response: Codigo de como ha resultado el metodo
         """
         empleadoBorrar = Empleado.objects.filter(id__icontains=id)
-        mostrar = empleadoBorrar.values()
         empleadoBorrar.delete()
-        return Response(mostrar.values(), 200)
+        return Response(model_to_dict(empleadoBorrar), 200)
     
     def put(self, request, id):
         """Funcion para modificar un empleado
@@ -101,5 +101,5 @@ class EmpleadoManagementId(APIView):
         except Exception as e:
             print(e)
             return Response({"error": e}, 500)
-        return Response({"modificado": model_to_dict(empleadoModify)}, 200)
+        return Response(model_to_dict(empleadoModify), 200)
     
