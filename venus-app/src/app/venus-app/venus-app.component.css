@@ -1,0 +1,53 @@
+.card-deck {
+    display: grid;
+    /* grid-template-rows: repeat(2, 1fr 2fr);*/
+    grid-template-columns: 100px repeat(4, 107px) 150px;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
+    gap: 40px;
+  
+    margin-left: 10%;
+}
+
+.card {
+    min-width: 100%;
+}
+
+.item {
+    margin-left: 30px;
+    padding: 20px;
+}
+.card-body> img{
+
+
+display: block;
+width: 100%;
+
+
+}
+
+.card-body-custom {
+    background-color: #a8f9e1;
+  }
+
+body{
+    
+        background: linear-gradient(-45deg, #896bff, #e73c7e, #74cae9, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+     height: 100vh;
+    
+  
+    
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}

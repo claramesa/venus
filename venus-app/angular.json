@@ -26,7 +26,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "src/app/venus-app/venus-app.component.css",
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css"
 
             ],
             "scripts": [ "node_modules/jquery/dist/jquery.min.js",
