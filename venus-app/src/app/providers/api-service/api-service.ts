@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Alumno } from 'src/app/modelo/Alumno';
+import { Categoria } from 'src/app/modelo/categoria';
+import { Producto } from 'src/app/modelo/producto';
+
 
 @Injectable()
 export class ApiServiceProvider {
@@ -10,25 +12,61 @@ export class ApiServiceProvider {
     constructor(public http: HttpClient) {
     }
 
-    getAlumnos(): Promise<Alumno[]> {
-        let promise = new Promise<Alumno[]>((resolve, reject) => {
-            this.http.get(this.URL + "/alumnos").toPromise()
+    getCategorias(): Promise<Categoria[]> {
+        let promise = new Promise<Categoria[]>((resolve, reject) => {
+            this.http.get(this.URL + "/categorias/").toPromise()
                 .then((data: any) => {
-                    let alumnos = new Array<Alumno>();
-                    data.forEach((alumno: Alumno) => {
-                        console.log(alumno);
-                        alumnos.push(alumno);
+                    let categorias = new Array<Categoria>();
+                    data.forEach((categoria: Categoria) => {
+                        console.log(categoria);
+                        categorias.push(categoria);
                     });
-                    resolve(alumnos);
+                    resolve(categorias);
                 })
                 .catch((error: Error) => {
                     reject(error.message);
                 });
         });
         return promise;
-    }//end_getAlumnos
+    }//end_getCategorias
+    
+    getProductos(): Promise<Producto[]> {
+        let promise = new Promise<Producto[]>((resolve, reject) => {
+            this.http.get(this.URL + "/productos/").toPromise()
+                .then((data: any) => {
+                    let productos = new Array<Producto>();
+                    data.forEach((producto: Producto) => {
+                        console.log(producto);
+                        productos.push(producto);
+                    });
+                    resolve(productos);
+                })
+                .catch((error: Error) => {
+                    reject(error.message);
+                });
+        });
+        return promise;
+    }//end_getProductos
 
+    getProductosPorCategoria(idCategoria:number): Promise<Producto[]> {
+        let promise = new Promise<Producto[]>((resolve, reject) => {
+            this.http.get(this.URL + "/productos/"+idCategoria).toPromise()
+                .then((data: any) => {
+                    let productos = new Array<Producto>();
+                    data.forEach((producto: Producto) => {
+                        console.log(producto);
+                        productos.push(producto);
+                    });
+                    resolve(productos);
+                })
+                .catch((error: Error) => {
+                    reject(error.message);
+                });
+        });
+        return promise;
+    }//end_getProductosPorCategoria
 
+/*
     eliminarAlumno(id: number): Promise<Boolean> {
         let promise = new Promise<Boolean>((resolve, reject) => {
             this.http.delete(this.URL + "/alumnos/" + id).toPromise().then(
@@ -84,6 +122,6 @@ export class ApiServiceProvider {
                 });
         });
         return promise;
-    }//end_insertarAlumno
+    }//end_insertarAlumno*/
 
 }//end_class
