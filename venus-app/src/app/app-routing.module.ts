@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 import { LoginUserComponent } from './login-user/login-user.component';
+import { TestComponent } from './test/test.component';
 
-//Recoge el campo de storage
-const local =localStorage.getItem("user_token") ? true:false;
 var routes: Routes = [];
+//Recoge el campo de storage
+/*const local =localStorage.getItem("user_token") ? true:false;
 //Si esta activo cambia el route
 if(local){
    routes= [
@@ -16,8 +18,12 @@ if(local){
     { path: '', component: LoginUserComponent },
   ];
   
-}
+}*/
 
+routes= [
+  {path: 'login', component: LoginUserComponent},
+  {path: 'test', component:TestComponent,canActivate:[AuthGuard]} ,
+] ;
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

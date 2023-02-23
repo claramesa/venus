@@ -107,7 +107,11 @@ export class LoginUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let tokenLocal= localStorage.getItem('user_token');
+    this.api.validToken(tokenLocal).subscribe((data:any)=>{ 
+      console.log(data);
   
+   });
   }
 
 

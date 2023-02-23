@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { ApiServiceProvider } from './provider/api-service/api-service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TestComponent } from './test/test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginUserComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

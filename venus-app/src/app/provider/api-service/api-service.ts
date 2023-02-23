@@ -36,6 +36,15 @@ export class ApiServiceProvider {//implements HttpInterceptor
 
     }//end_user_django
 
+    validToken(token: any){
+        console.log("Entra en token");
+        console.log(token);
+        const headers = new HttpHeaders({});
+        headers.set('Authorization',  "Bearer "+ (token));
+
+        return this.http.get<any>(this.URLDjango + `/api-auth/`,{headers});
+    }
+
     errorHandler(error: HttpErrorResponse) {
         return throwError(error.message || "server error.");
     };
