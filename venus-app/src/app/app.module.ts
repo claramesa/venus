@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HomeVenusComponent } from './home-venus/home-venus.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FootbarComponent } from './footbar/footbar.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FootbarComponent } from './footbar/footbar.component';
     HomeVenusComponent,
     NavbarComponent,
     FootbarComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

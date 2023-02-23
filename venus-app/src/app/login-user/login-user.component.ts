@@ -100,7 +100,7 @@ export class LoginUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+    console.log("aqui")
   }
 
 
