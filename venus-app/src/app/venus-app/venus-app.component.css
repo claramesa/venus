@@ -4,7 +4,7 @@
     grid-template-columns: 100px repeat(4, 107px) 150px;
     grid-template-columns: repeat(auto-fill, minmax(100px, 150px));
     gap: 40px;
-  
+
     margin-left: 10%;
 }
 
@@ -16,58 +16,58 @@
     margin-left: 30px;
     padding: 20px;
 }
-.card-body> img{
+
+.card-body>img {
 
 
-display: block;
-width: 100%;
+    display: block;
+    width: 100%;
 
 
 }
 
 .card-body-custom {
     background-color: #a8f9e1;
-  }
+}
 
-body{
-    
-        background: linear-gradient(-45deg, #896bff, #e73c7e, #74cae9, #23d5ab);
-        background-size: 400% 400%;
-        animation: gradient 15s ease infinite;
-     height: 100vh;
-    
-  
-    
+body {
+    background: linear-gradient(-45deg, #896bff, #e73c7e, #74cae9, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 40s ease infinite;
+    height: 100vh;
 }
 
 @keyframes gradient {
     0% {
         background-position: 0% 50%;
     }
+
     50% {
         background-position: 100% 50%;
     }
+
     100% {
         background-position: 0% 50%;
     }
 }
 
 .baseBlock {
-	margin: 0px 0px 35px 0px;
-	padding: 0 0 15px 0px;
-	border-radius: 5px;
-	overflow: hidden;
-	min-height: 150px;
-	-moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-	-o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-	transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    margin: 0px 0px 35px 0px;
+    padding: 0 0 15px 0px;
+    border-radius: 5px;
+    overflow: hidden;
+    min-height: 150px;
+    -moz-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    -o-transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .baseBlock:hover {
-	-webkit-transform: translate(0, -8px);
-	-moz-transform: translate(0, -8px);
-	-ms-transform: translate(0, -8px);
-	-o-transform: translate(0, -8px);
-	transform: translate(0, -8px);
-	box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+    -webkit-transform: translate(0, -8px);
+    -moz-transform: translate(0, -8px);
+    -ms-transform: translate(0, -8px);
+    -o-transform: translate(0, -8px);
+    transform: translate(0, -8px);
+    box-shadow: 0 40px 40px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }

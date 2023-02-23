@@ -4,20 +4,20 @@ import { LoginUserComponent } from './login-user/login-user.component';
 import { VenusAppComponent } from './venus-app/venus-app.component';
 
 //Recoge el campo de storage
-const local =localStorage.getItem("user_token") ? true:false;
+const local = localStorage.getItem("user_token") ? true : false;
 var routes: Routes = [];
 //Si esta activo cambia el route
-if(local){
-   routes= [
+if (local) {
+  routes = [
     { path: '', component: LoginUserComponent },
   ];
-}else{
-  routes= [
+} else {
+  routes = [
     { path: '', component: LoginUserComponent },
     { path: 'venus-app', component: VenusAppComponent },
 
   ];
-  
+
 }
 
 
@@ -25,6 +25,6 @@ if(local){
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
 
 }
