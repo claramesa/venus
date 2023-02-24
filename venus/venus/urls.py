@@ -21,5 +21,5 @@ from authentication import urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Estas son las url relacionadas con el login de usuarios
-    path("api-auth/", include(urls)),
+    path("api-auth", include(urls)),
 ]
