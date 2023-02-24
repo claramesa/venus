@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Categoria } from '../modelo/categoria';
 import { Producto } from '../modelo/producto';
 import { ApiServiceProvider } from '../providers/api-service/api-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vista-inventario',
@@ -12,7 +13,7 @@ export class VistaInventarioComponent {
   productos: Producto[]=[];
   categorias: Categoria[]=[];
   filtro:string="";
-  constructor(private apiService: ApiServiceProvider) {
+  constructor(private apiService: ApiServiceProvider,private router:Router) {
     this.apiService.getProductos()
     .then((productos: Producto[]) => {
       this.productos= productos;
@@ -49,7 +50,8 @@ export class VistaInventarioComponent {
       this.apiService.getProductosPorCategoria(parseInt(id))
       .then((productos: Producto[]) => {
         this.productos= productos;
-        console.log(productos);
+        //console.log(productos);
+        
       })
       .catch((error: string) => {
         console.log(error);

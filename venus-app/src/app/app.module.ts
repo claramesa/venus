@@ -6,13 +6,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VistaInventarioComponent } from './vista-inventario/vista-inventario.component';
-import { CategoriaFiltroPipe } from './categoria-filtro.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     VistaInventarioComponent,
-    CategoriaFiltroPipe
   ],
   imports: [
     BrowserModule,
