@@ -1,10 +1,12 @@
-import { VistaInventarioComponent } from './vista-inventario/vista-inventario.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InventarioComponent } from './inventario/inventario.component';
 
-var routes: Routes = [
-  { path: '', component: VistaInventarioComponent }
-];
+const routes: Routes = [{
+  path: 'inventario',
+  title: 'Inventario',
+  component: InventarioComponent
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
