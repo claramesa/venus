@@ -42,7 +42,7 @@ export class ApiServiceProvider {
 
     getProductosPorCategoria(idCategoria:number): Promise<Producto[]> {
         let promise = new Promise<Producto[]>((resolve, reject) => {
-            this.http.get(this.URL + "/productos/"+idCategoria).toPromise()
+            this.http.get(this.URL + "/productosc/"+idCategoria).toPromise()
                 .then((data: any) => {
                     let productos = new Array<Producto>();
                     data.forEach((producto: Producto) => {

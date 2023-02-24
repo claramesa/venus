@@ -2,6 +2,21 @@
     <!-- Navigation-->
     <!-- Masthead-->
         <div class="container d-flex align-items-center flex-column">
+      <!--    <div class="">
+                <select [(ngModel)]="filtro" (ngModelChange)="categoriaProductos(filtro)" >
+                  <option [value] ="" > </option>
+                  <div *ngFor="let categoria of categorias">
+                    <option [value] ={categoria.id} > {{categoria.nombre}} </option>
+                  </div>
+                </select>
+              </div> -->
+  
+              <select  (change)="categoriaProductos($event)" >
+                  <option  value ="" ></option>
+                  <option *ngFor="let categoria of categorias" [value]="categoria.id"> {{categoria.nombre}}</option>
+              </select>
+         
+  
           <span *ngFor="let producto of productos; let indice=index">
           <div class="card">
             <img src="https://pbs.twimg.com/media/EXdRa6wXsAAqSBA.jpg" class="card-img-top" alt="CapiComeMazorca"/>
