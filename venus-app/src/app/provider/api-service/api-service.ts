@@ -22,43 +22,42 @@ export class ApiServiceProvider {//implements HttpInterceptor
         return this.http.get<any>(`${this.URL}`);
     }//end_all_user
 
-    
+
     checkUser(user: Usuario) {
-       const headers= new HttpHeaders()
+        const headers = new HttpHeaders()
         /* .set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS')*/
-       const body = {
+        const body = {
             'username': user.username,
             'password': user.password
         }
-        return this.http.post(this.URLDjango + `/api-auth/`, body,{headers});
-        
-      
+        return this.http.post(this.URLDjango + `/api-auth/`, body, { headers });
+
+
 
     }//end_user_django
 
-    validToken(token: any){
-        console.log("Entra en token");
-        console.log(token);
-        const headers = new HttpHeaders({});
-        headers.set('Authorization',  "Bearer "+ (token));
+    validToken(token: any) {
+        const headers = new HttpHeaders()
+        //.set('content-type', 'application/json; charset=utf-8')
+        .set('Authorization', "Bearer " + token);
 
-        return this.http.get<any>(this.URLDjango + `/api-auth/`,{headers});
+        return this.http.get(this.URLDjango + `/api-auth/`, { headers });
     }
 
     errorHandler(error: HttpErrorResponse) {
         return throwError(error.message || "server error.");
     };
     //https://stackoverflow.com/questions/48501513/set-jwt-token-in-header-in-angular-5-app
-  
+
     /*What about deprecated - import HttpHeaders from the @angular/common/http. 
       If you need to add the JWT for each token, it will be better to use HttpInterceptor */
     findUser(paramToken: any) {
-        const headers= new HttpHeaders()
-          //.set('content-type', 'application/json; charset=utf-8')
-          .set('Authorization',  "Bearer "+ paramToken);
-            
-         return this.http.get(this.URLDjango + "/api-auth/",{headers});
- 
-     }//end_user_django
- 
+        const headers = new HttpHeaders()
+            //.set('content-type', 'application/json; charset=utf-8')
+            .set('Authorization', "Bearer " + paramToken);
+
+        return this.http.get(this.URLDjango + "/api-auth/", { headers });
+
+    }//end_user_django
+
 }//end_class

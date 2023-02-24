@@ -9,7 +9,7 @@ var routes: Routes = [];
 /*const local =localStorage.getItem("user_token") ? true:false;
 //Si esta activo cambia el route
 if(local){
-   routes= [
+  routes= [
     { path: '', component: LoginUserComponent },
   ];
 }else{
@@ -20,15 +20,15 @@ if(local){
   
 }*/
 
-routes= [
-  {path: 'login', component: LoginUserComponent},
-  {path: 'test', component:TestComponent,canActivate:[AuthGuard]} ,
-] ;
+routes = [
+  { path: 'login', component: LoginUserComponent },
+  { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { 
+export class AppRoutingModule {
 
 }
