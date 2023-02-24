@@ -13,17 +13,11 @@
     <div class="card w-70 principal bg-transparent border-0">
       <div class="card-body ">
         <div class="card-deck">
-          <div class="card item card-body-custom bg-transparent-2 baseBlock" (click)="navigateToVenus()">
-            <div class="card-body">
-              <img src="../../assets/Inventory.png" />
+          <div class="card item card-body-custom bg-transparent-2 baseBlock" *ngFor="let apps of listaAplicaciones">
+            <div class="card-body" [routerLink]="[apps.ruta]">
+              <img src={{apps.imagen}} />
             </div>
-            <h5 class="fw-bolder" style="text-align: center;">Inventario</h5>
-          </div>
-          <div class="card item  card-body-custom baseBlock">
-            <div class="card-body">
-              <h5 class="card-title">Etiqueta 2</h5>
-              <p class="card-text">Texto de la etiqueta 2</p>
-            </div>
+            <h5 class="fw-bolder" style="text-align: center;">{{apps.nombre}}</h5>
           </div>
         </div>
       </div>

@@ -8,14 +8,18 @@ import { Router } from '@angular/router';
 })
 export class VenusAppComponent {
 
-  //lista contiene objetos (imagen, nombre, ruta(lugar de la app a acceder))
-  listaAplicaciones = []
+  //ajustar ruta con el nombre del componente a ir
+  listaAplicaciones = [{
+    "imagen": "../../assets/Inventory.png",
+    "nombre": "Inventario",
+    "ruta": '/inventario'
+  }, {
+    "imagen": "../../assets/ajustes.png",
+    "nombre": "Ajustes",
+    "ruta": "/ajustes"
+  }]
 
-  constructor(private router: Router) { }
-
-  navigateToVenus() {
-    this.router.navigate(['/']);
-  }
+  constructor() { }
 
 
 }
