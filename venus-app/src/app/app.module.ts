@@ -5,12 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { InventarioComponent } from './inventario/inventario.component';
+import { VistaInventarioComponent } from './vista-inventario/vista-inventario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InventarioComponent
+    VistaInventarioComponent
   ],
   imports: [
     BrowserModule,

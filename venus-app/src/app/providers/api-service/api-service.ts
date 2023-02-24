@@ -16,12 +16,8 @@ export class ApiServiceProvider {
         let promise = new Promise<Categoria[]>((resolve, reject) => {
             this.http.get(this.URL + "/categorias/").toPromise()
                 .then((data: any) => {
-                    let categorias = new Array<Categoria>();
-                    data.forEach((categoria: Categoria) => {
-                        console.log(categoria);
-                        categorias.push(categoria);
-                    });
-                    resolve(categorias);
+                    data = data.map((c: Categoria) => {return c});
+                    resolve(data);
                 })
                 .catch((error: Error) => {
                     reject(error.message);
@@ -34,12 +30,8 @@ export class ApiServiceProvider {
         let promise = new Promise<Producto[]>((resolve, reject) => {
             this.http.get(this.URL + "/productos/").toPromise()
                 .then((data: any) => {
-                    let productos = new Array<Producto>();
-                    data.forEach((producto: Producto) => {
-                        console.log(producto);
-                        productos.push(producto);
-                    });
-                    resolve(productos);
+                    data = data.map((p: Producto) => {return p});
+                    resolve(data);
                 })
                 .catch((error: Error) => {
                     reject(error.message);

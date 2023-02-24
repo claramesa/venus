@@ -12,10 +12,18 @@ export class VistaInventarioComponent {
   productos: Producto[]=[];
   categorias: Categoria[]=[];
   constructor(private apiService: ApiServiceProvider) {
+    this.apiService.getProductos()
+    .then((productos: Producto[]) => {
+      this.productos= productos;
+    })
+    .catch((error: string) => {
+      console.log(error);
+    });
+    console.log(this.productos);
     this.apiService.getCategorias()
       .then((categorias: Categoria[]) => {
         this.categorias = categorias;
-        console.log(this.categorias);
+    //    console.log(this.categorias);
       })
       .catch((error: string) => {
         console.log(error);
