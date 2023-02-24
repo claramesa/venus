@@ -3,24 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { LoginUserComponent } from './login-user/login-user.component';
 import { TestComponent } from './test/test.component';
-
 var routes: Routes = [];
-//Recoge el campo de storage
-/*const local =localStorage.getItem("user_token") ? true:false;
-//Si esta activo cambia el route
-if(local){
-  routes= [
-    { path: '', component: LoginUserComponent },
-  ];
-}else{
-  console.log("Entada")
-  routes= [
-    { path: '', component: LoginUserComponent },
-  ];
-  
-}*/
-
 routes = [
+ // { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+ // { path: 'app', component: VenusAppComponent, canActivate: [AuthGuard] },
+ // { path: 'inventario', component: InventarioComponent, canActivate: [AuthGuard] },
+ //{ path: 'ajuste', component: AjusteComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginUserComponent },
   { path: 'test', component: TestComponent, canActivate: [AuthGuard] },
 ];
