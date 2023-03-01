@@ -32,15 +32,15 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 # Se instala la aplicacion creada anteriormente de authentication y la app de django_expiring_token
 INSTALLED_APPS = [
-    "authentication.apps.AuthenticationConfig",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "django_expiring_token",
-    "corsheaders",
+    'inventario.apps.InventarioConfig',
+    'empleados.apps.EmpleadosConfig',
+    'rest_framework',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 

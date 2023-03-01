@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from inventario import views as vInv
+from empleados import views as vEmp
 
 from authentication import urls
 
@@ -22,4 +24,12 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # Estas son las url relacionadas con el login de usuarios
     path("api-auth", include(urls)),
+    path('productos/', vInv.ProductoManagement.as_view()),
+    path('producto/<int:id>', vInv.ProductoManagementId.as_view()),
+    path('empleados/', vEmp.EmpleadoManagement.as_view()),
+    path('empleado/<int:id>', vEmp.EmpleadoManagementId.as_view()),
+    path('categorias/', vInv.CategoriaManagement.as_view()),
+    path('categoria/<int:id>', vInv.CategoriaManagementId.as_view()),
+    path('productosc/<int:id>', vInv.ProductoManagementCategoria.as_view())
+
 ]
